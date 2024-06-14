@@ -1,19 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Routes } from 'react-router-dom'
 
-import { AuthLayout, ChatLayout } from './layouts'
-import { ChannelPage, EmptyPage, LoginPage, RegisterPage } from './pages'
+import { AuthRoutes } from './auth/auth-routes'
+import { ChatRoutes } from './chat/chat-routes'
 
 export const Router = () => (
     <BrowserRouter>
         <Routes>
-            <Route element={<AuthLayout />}>
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-            </Route>
-            <Route element={<ChatLayout />}>
-                <Route path="/channel/:cid" element={<ChannelPage />} />
-                <Route path="*" element={<EmptyPage />} />
-            </Route>
+            {AuthRoutes}
+            {ChatRoutes}
         </Routes>
     </BrowserRouter>
 )

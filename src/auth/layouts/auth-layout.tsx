@@ -1,7 +1,7 @@
 import { Center, Paper } from '@mantine/core'
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useUser } from '~/stores'
+import { useUser } from '../stores'
 
 export const AuthLayout = () => {
     const user = useUser(state => state.user)

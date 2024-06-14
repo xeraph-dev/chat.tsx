@@ -1,13 +1,10 @@
 import { Icon } from '@iconify/react'
 import { Button, Group } from '@mantine/core'
-
-import { useUser } from '~/stores'
+import { Link } from 'react-router-dom'
 
 export const LogoutButton = () => {
-    const logout = useUser(state => state.logout)
-
     return (
-        <Button variant="default" onClick={logout}>
+        <Button component={Link} variant="default" to="/logout">
             <Group gap="xs">
                 <Icon icon="tabler:logout" />
                 <span>Logout</span>

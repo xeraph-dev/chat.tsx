@@ -5,7 +5,7 @@ import type { z } from 'zod'
 
 import type { RegisterData } from 'shared'
 
-import { useUser } from '~/stores'
+import { useUser } from '../stores'
 
 export const RegisterPage = () => {
     const register = useUser(state => state.register)

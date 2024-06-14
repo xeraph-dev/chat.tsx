@@ -9,7 +9,7 @@ import {
     type DefaultStreamChatGenerics,
 } from 'stream-chat-react'
 
-import { useConfirmDeleteChannelModal, useEditChannelModal } from '~/components/modals'
+import { useConfirmDeleteChannelModal, useEditChannelModal } from '../modals'
 
 export const ChannelListPreview: ComponentType<
     ChannelPreviewUIComponentProps<DefaultStreamChatGenerics>

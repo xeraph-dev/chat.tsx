@@ -3,8 +3,10 @@ import { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { Chat } from 'stream-chat-react'
 
-import { ChannelList, CreateChannelButton, LogoutButton } from '~/components'
-import { useClient, useUser } from '~/stores'
+import { useUser } from '~/auth/stores'
+import { useClient } from '~/chat/stores'
+
+import { ChannelList, CreateChannelButton, LogoutButton } from '../components'
 
 export const ChatLayout = () => {
     const client = useClient(state => state.client)

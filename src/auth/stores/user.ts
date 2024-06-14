@@ -1,31 +1,36 @@
 import ky from 'ky'
-import { type LoginData, type RegisterData, UserData } from 'shared'
 import type { z } from 'zod'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
+import { type LoginData, type RegisterData, UserData } from 'shared'
+
 export type UserState = {
-    // client: StreamChat
-    // connected: boolean
     user?: z.infer<typeof UserData>
     login(data: z.infer<typeof LoginData>): Promise<void>
     register(data: z.infer<typeof RegisterData>): Promise<void>
-    logout(): void
+    logout(): Promise<void>
 }
 
 export const useUser = create(
     persist<UserState>(
-        set => ({
+        (set, get) => ({
             login: async json => {
-                const user = await ky.post('/api/login', { json }).json().then(UserData.parse)
-                set({ user })
+                return ky
+                    .post('/api/login', { json })
+                    .json()
+                    .then(user => set({ user: UserData.parse(user) }))
             },
             register: async json => {
-                const user = await ky.post('/api/register', { json }).json().then(UserData.parse)
-                set({ user })
+                return ky
+                    .post('/api/register', { json })
+                    .json()
+                    .then(user => set({ user: UserData.parse(user) }))
             },
             logout: async () => {
-                set({ user: undefined })
+                const id = get().user?.id
+                if (!id) return
+                return ky.post('/api/logout', { json: { id } }).then(() => set({ user: undefined }))
             },
         }),
         {

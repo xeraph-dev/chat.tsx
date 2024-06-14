@@ -5,7 +5,7 @@ import type { z } from 'zod'
 
 import { LoginData } from 'shared'
 
-import { useUser } from '~/stores'
+import { useUser } from '../stores'
 
 export const LoginPage = () => {
     const login = useUser(state => state.login)
